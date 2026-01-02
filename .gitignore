@@ -93,3 +93,4 @@ lint/tmp/
 *~
 
 Firebase/google-services.json
+Firebase/node_modules/
