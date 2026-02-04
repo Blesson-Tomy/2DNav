@@ -7,560 +7,101 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-// Your wall data
-const walls = [
-  {
-    "x1": 96,
-    "y1": 808,
-    "x2": 96,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 238,
-    "y1": 3740,
-    "x2": 238,
-    "y2": 3816,
-    "type": "wall"
-  },
-  {
-    "x1": 528,
-    "y1": 3740,
-    "x2": 528,
-    "y2": 3878,
-    "type": "wall"
-  },
-  {
-    "x1": 666,
-    "y1": 1444,
-    "x2": 666,
-    "y2": 1944,
-    "type": "wall"
-  },
-  {
-    "x1": 666,
-    "y1": 2061,
-    "x2": 666,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 666,
-    "y1": 2736,
-    "x2": 666,
-    "y2": 3620,
-    "type": "wall"
-  },
-  {
-    "x1": 666,
-    "y1": 3816,
-    "x2": 666,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 701,
-    "y1": 4022,
-    "x2": 701,
-    "y2": 4179,
-    "type": "wall"
-  },
-  {
-    "x1": 816,
-    "y1": 1504,
-    "x2": 816,
-    "y2": 1776,
-    "type": "wall"
-  },
-  {
-    "x1": 816,
-    "y1": 71,
-    "x2": 816,
-    "y2": 219,
-    "type": "wall"
-  },
-  {
-    "x1": 900,
-    "y1": 4022,
-    "x2": 900,
-    "y2": 4179,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 71,
-    "x2": 949,
-    "y2": 356,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2476,
-    "x2": 948,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2736,
-    "x2": 948,
-    "y2": 3450,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 3572,
-    "x2": 948,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 1504,
-    "x2": 948,
-    "y2": 1776,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2061,
-    "x2": 948,
-    "y2": 2359,
-    "type": "wall"
-  },
-  {
-    "x1": 1090,
-    "y1": 2476,
-    "x2": 1090,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 1229,
-    "y1": 2476,
-    "x2": 1229,
-    "y2": 2552,
-    "type": "wall"
-  },
-  {
-    "x1": 1369,
-    "y1": 2476,
-    "x2": 1369,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 71,
-    "x2": 1512,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 808,
-    "x2": 1512,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 2061,
-    "x2": 1512,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 2076,
-    "y1": 936,
-    "x2": 2076,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 936,
-    "x2": 2498,
-    "y2": 1020,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 1082,
-    "x2": 2498,
-    "y2": 1444,
-    "type": "wall"
-  },
-  {
-    "x1": 2630,
-    "y1": 71,
-    "x2": 2630,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 2630,
-    "y1": 936,
-    "x2": 2630,
-    "y2": 1082,
-    "type": "wall"
-  },
-  {
-    "x1": 2630,
-    "y1": 1222,
-    "x2": 2630,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 3471,
-    "y1": 936,
-    "x2": 3471,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 3757,
-    "y1": 71,
-    "x2": 3757,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 3894,
-    "y1": 71,
-    "x2": 3894,
-    "y2": 219,
-    "type": "wall"
-  },
-  {
-    "x1": 4037,
-    "y1": 71,
-    "x2": 4037,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 816,
-    "y1": 71,
-    "x2": 4037,
-    "y2": 71,
-    "type": "wall"
-  },
-  {
-    "x1": 3757,
-    "y1": 219,
-    "x2": 3834,
-    "y2": 219,
-    "type": "wall"
-  },
-  {
-    "x1": 3960,
-    "y1": 219,
-    "x2": 4037,
-    "y2": 219,
-    "type": "wall"
-  },
-  {
-    "x1": 3757,
-    "y1": 496,
-    "x2": 3894,
-    "y2": 497,
-    "type": "wall"
-  },
-  {
-    "x1": 3834,
-    "y1": 650,
-    "x2": 4037,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 1439,
-    "y1": 650,
-    "x2": 1952,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 2076,
-    "y1": 650,
-    "x2": 2498,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 2749,
-    "y1": 650,
-    "x2": 3629,
-    "y2": 650,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 808,
-    "x2": 238,
-    "y2": 808,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 808,
-    "x2": 1786,
-    "y2": 808,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 936,
-    "x2": 371,
-    "y2": 939,
-    "type": "wall"
-  },
-  {
-    "x1": 3592,
-    "y1": 936,
-    "x2": 4037,
-    "y2": 935,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 936,
-    "x2": 1786,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 2076,
-    "y1": 936,
-    "x2": 2372,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 936,
-    "x2": 2630,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 2749,
-    "y1": 936,
-    "x2": 3471,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 1082,
-    "x2": 2630,
-    "y2": 1082,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 1222,
-    "x2": 2567,
-    "y2": 1222,
-    "type": "wall"
-  },
-  {
-    "x1": 2498,
-    "y1": 1363,
-    "x2": 2630,
-    "y2": 1363,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 1504,
-    "x2": 666,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 816,
-    "y1": 1504,
-    "x2": 948,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 2076,
-    "y1": 1504,
-    "x2": 4037,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2061,
-    "x2": 1512,
-    "y2": 2061,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2476,
-    "x2": 1027,
-    "y2": 2476,
-    "type": "wall"
-  },
-  {
-    "x1": 1090,
-    "y1": 2476,
-    "x2": 1439,
-    "y2": 2476,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 2615,
-    "x2": 1090,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 1229,
-    "y1": 2615,
-    "x2": 1512,
-    "y2": 2615,
-    "type": "wall"
-  },
-  {
-    "x1": 173,
-    "y1": 3450,
-    "x2": 666,
-    "y2": 3450,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 3450,
-    "x2": 1512,
-    "y2": 3450,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 3740,
-    "x2": 666,
-    "y2": 3740,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 3878,
-    "x2": 238,
-    "y2": 3878,
-    "type": "wall"
-  },
-  {
-    "x1": 96,
-    "y1": 4022,
-    "x2": 752,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 850,
-    "y1": 4022,
-    "x2": 1512,
-    "y2": 4022,
-    "type": "wall"
-  },
-  {
-    "x1": 701,
-    "y1": 4179,
-    "x2": 900,
-    "y2": 4179,
-    "type": "wall"
-  },
-  {
-    "x1": 816,
-    "y1": 219,
-    "x2": 1512,
-    "y2": 936,
-    "type": "wall"
-  },
-  {
-    "x1": 948,
-    "y1": 1504,
-    "x2": 238,
-    "y2": 808,
-    "type": "wall"
-  },
-  {
-    "x1": 568,
-    "y1": 353,
-    "x2": 1112,
-    "y2": 903,
-    "type": "wall"
-  },
-  {
-    "x1": 371,
-    "y1": 560,
-    "x2": 910,
-    "y2": 1100,
-    "type": "wall"
-  },
-  {
-    "x1": 2106,
-    "y1": 1906,
-    "x2": 1891,
-    "y2": 1685,
-    "type": "wall"
-  },
-  {
-    "x1": 1689,
-    "y1": 1886,
-    "x2": 1909,
-    "y2": 2102,
-    "type": "wall"
-  },
-  {
-    "x1": 761,
-    "y1": 549,
-    "x2": 562,
-    "y2": 751,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 2061,
-    "x2": 1689,
-    "y2": 1886,
-    "type": "wall"
-  },
-  {
-    "x1": 1891,
-    "y1": 1685,
-    "x2": 2076,
-    "y2": 1504,
-    "type": "wall"
-  },
-  {
-    "x1": 1512,
-    "y1": 2615,
-    "x2": 1512,
-    "y2": 2615,
-    "type": "wall"
-  }
-];
+const entrances=[
+    {
+      "id": 1,
+      "x": 881.0,
+      "y": 1776.0,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    },
+    {
+      "id": 2,
+      "x": 881.0,
+      "y": 1504.0,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    },
+    {
+      "id": 3,
+      "x": 741.5,
+      "y": 1504.0,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    },
+    {
+      "id": 4,
+      "x": 667.0,
+      "y": 1376.0,
+      "available": true,
+      "name": "MTB Department Library",
+      "room_no": "201"
+    },
+    {
+      "id": 5,
+      "x": 1385.0,
+      "y": 649.0,
+      "available": true,
+      "name": "Department Library Electrical Engg",
+      "room_no": "214"
+    },
+    {
+      "id": 6,
+      "x": 1786.0,
+      "y": 870.5,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    },
+    {
+      "id": 7,
+      "x": 1512.0,
+      "y": 870.5,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    },
+    {
+      "id": 8,
+      "x": 1512.0,
+      "y": 727.5,
+      "available": true,
+      "name": null,
+      "room_no": null,
+      "stairs": true
+    }
+  ]
 
-async function uploadFloorData() {
-  // Store all walls in a single document
-  await db.doc('buildings/MTB/floors/floor1').set({
-    walls: walls,
-    floorName: 'Floor 1',
-    buildingId: 'MTB',
-    totalWalls: walls.length,
+
+// async function uploadFloorData() {
+//   // Store all walls and entrances in a single document
+//   await db.doc('buildings/MTB/floors/floor1').set({
+//     walls: walls,
+//     entrances: entrances,
+//     floorName: 'Floor 1',
+//     buildingId: 'MTB',
+//     totalWalls: walls.length,
+//     totalEntrances: entrances.length,
+//     updatedAt: admin.firestore.FieldValue.serverTimestamp()
+//   });
+
+async function updatePolygonData() {
+  await db.doc('buildings/MTB/floors/floor1.5').update({
+    entrances: entrances,
+    totalEntrances: entrances.length,
     updatedAt: admin.firestore.FieldValue.serverTimestamp()
   });
+
   
-  console.log(`✓ Successfully uploaded ${walls.length} walls to floor1 document!`);
+  console.log(`✓ Successfully uploaded ${entrances.length} entrances to floor1 document!`);
 }
 
-uploadFloorData().catch(console.error);
+updatePolygonData().catch(console.error);
